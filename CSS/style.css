@@ -1,0 +1,562 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --ink: #171717;
+  --paper: #f2eee7;
+  --coral: #ff6b52;
+  --muted: #aaa49a;
+  --line: rgba(242, 238, 231, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--paper);
+  background: var(--ink);
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+}
+
+body::before,
+body::after {
+  position: fixed;
+  z-index: 0;
+  display: block;
+  width: 38vw;
+  height: 38vw;
+  border: 1px solid rgba(255, 107, 82, 0.18);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+body::before {
+  top: -24vw;
+  right: -10vw;
+}
+
+body::after {
+  bottom: -28vw;
+  left: -14vw;
+  border-color: rgba(242, 238, 231, 0.12);
+}
+
+.page-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: 100vh;
+  padding: 7vw;
+  place-items: center;
+}
+
+.welcome-panel {
+  width: min(100%, 960px);
+  min-height: min(680px, 78vh);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  border: 1px solid var(--line);
+  background: rgba(23, 23, 23, 0.82);
+  box-shadow: 20px 20px 0 var(--coral);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: arrive 700ms ease-out both;
+}
+
+.panel-topline,
+.panel-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 0.75fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 5rem 0;
+}
+
+.kicker {
+  margin: 0 0 1.5rem;
+  color: var(--coral);
+  font-family: "DM Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
+}
+
+h1 em {
+  color: var(--coral);
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+
+.intro-copy {
+  max-width: 360px;
+  margin: 2rem 0 2.5rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.action-button {
+  display: inline-flex;
+  gap: 1.25rem;
+  align-items: center;
+  border: 1px solid var(--coral);
+  padding: 0.9rem 1rem 0.9rem 1.25rem;
+  color: var(--ink);
+  background: var(--coral);
+  cursor: pointer;
+  font: 600 0.8rem "DM Mono", monospace;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.action-button:hover,
+.action-button:focus-visible {
+  color: var(--paper);
+  background: transparent;
+  outline: none;
+  transform: translate(4px, -4px);
+}
+
+.button-arrow {
+  font-size: 1.1rem;
+}
+
+.response {
+  min-height: 1.2em;
+  margin: 1rem 0 0;
+  color: var(--paper);
+  font-size: 0.85rem;
+}
+
+.orbital-mark {
+  position: relative;
+  width: min(30vw, 270px);
+  aspect-ratio: 1;
+  margin: auto;
+  animation: drift 8s ease-in-out infinite;
+}
+
+.identity-mark {
+  width: min(100%, 270px);
+  margin: auto;
+}
+
+.identity-label {
+  margin: 2rem 0 0.8rem;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.interest-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.interest-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+
+.interest-list li span {
+  color: var(--coral);
+  font: 0.68rem "DM Mono", monospace;
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(242, 238, 231, 0.35);
+  border-radius: 50%;
+  transform: rotate(-35deg) scaleY(0.42);
+}
+
+.orbit-two {
+  transform: rotate(55deg) scaleY(0.42);
+  border-color: rgba(255, 107, 82, 0.65);
+}
+
+.core {
+  position: absolute;
+  inset: 35%;
+  display: grid;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--paper);
+  place-items: center;
+  font: 500 0.75rem "DM Mono", monospace;
+}
+
+.panel-footer {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.explore-shell {
+  display: block;
+  padding: clamp(1.5rem, 5vw, 5rem) 7vw;
+}
+
+.explore-page {
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  animation: arrive 700ms ease-out both;
+}
+
+.explore-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.back-link {
+  color: var(--paper);
+  font: 0.7rem "DM Mono", monospace;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--coral);
+}
+
+.explore-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+  padding: clamp(4rem, 9vw, 8rem) 0 4rem;
+}
+
+.explore-intro .kicker {
+  grid-column: 1 / -1;
+  margin-bottom: -1rem;
+}
+
+.explore-intro h1 {
+  margin: 0;
+}
+
+.explore-intro .intro-copy {
+  margin: 0 0 0.5rem;
+}
+
+.section-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-nav a {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1rem;
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.section-nav a + a {
+  border-left: 1px solid var(--line);
+}
+
+.section-nav a:hover,
+.section-nav a:focus-visible {
+  color: var(--ink);
+  background: var(--coral);
+}
+
+.section-nav span,
+.section-number,
+.item-tag,
+.project-status,
+.project-index,
+.result-label {
+  color: var(--coral);
+  font: 0.68rem "DM Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.workshop-section {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 2rem;
+}
+
+.section-heading {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+}
+
+.item-card {
+  min-height: 220px;
+  padding: 1.5rem;
+  background: var(--ink);
+}
+
+.item-card h3,
+.project-row h3 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.item-card p,
+.project-row p,
+.calculator-help {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.project-list {
+  border-top: 1px solid var(--line);
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-row h3 {
+  margin: 0 0 0.4rem;
+}
+
+.project-status {
+  color: var(--muted);
+}
+
+.calculator-section {
+  padding-bottom: 3rem;
+}
+
+.calculator-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.calculator-form label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.input-row input {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.9rem 1rem;
+  color: var(--paper);
+  background: transparent;
+  font: 1rem "DM Mono", monospace;
+}
+
+.input-row input:focus {
+  border-color: var(--coral);
+  outline: none;
+}
+
+.calculator-help {
+  margin-top: 1rem;
+}
+
+.calculator-error {
+  min-height: 1.2em;
+  margin: 0.75rem 0 0;
+  color: var(--coral);
+  font-size: 0.85rem;
+}
+
+.calculator-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  border-left: 1px solid var(--coral);
+  padding: 0.25rem 0 0.25rem 1.5rem;
+}
+
+.calculator-result strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font: 1.3rem "DM Mono", monospace;
+}
+
+.sequence-details {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.sequence-details summary {
+  cursor: pointer;
+  color: var(--coral);
+  font: 0.7rem "DM Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sequence-details p {
+  max-height: 130px;
+  overflow: auto;
+  color: var(--muted);
+  font: 0.8rem/1.8 "DM Mono", monospace;
+  overflow-wrap: anywhere;
+}
+
+.explore-page > .panel-footer {
+  margin-top: 1.5rem;
+  border-top: 0;
+}
+
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(-8px); }
+}
+
+@media (max-width: 650px) {
+  .page-shell {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .welcome-panel {
+    min-height: calc(100vh - 3rem);
+    box-shadow: 10px 10px 0 var(--coral);
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 4rem 0;
+  }
+
+  .orbital-mark {
+    width: min(48vw, 210px);
+  }
+
+  .identity-mark {
+    width: min(100%, 300px);
+  }
+
+  .explore-shell {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .explore-intro {
+    display: block;
+    padding: 4rem 0 3rem;
+  }
+
+  .explore-intro .kicker {
+    margin-bottom: 1.5rem;
+  }
+
+  .explore-intro .intro-copy {
+    margin-top: 2rem;
+  }
+
+  .section-nav,
+  .item-grid,
+  .calculator-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .section-nav a + a {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .item-card {
+    min-height: 0;
+  }
+
+  .project-row {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  .project-status {
+    grid-column: 2;
+  }
+
+  .input-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .calculator-result {
+    margin-top: 1rem;
+  }
+}
