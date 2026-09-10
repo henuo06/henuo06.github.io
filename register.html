@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register</title>
+
+  <link rel="stylesheet" href="/css/auth.css" />
+</head>
+<body>
+  <div class="card">
+    <a class="back-link" href="/">← Back to henuo.dev</a>
+
+    <h1>Register</h1>
+    <p class="muted">Already have an account? <a href="/login.html">Login</a></p>
+
+    <form id="f">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required autocomplete="email" />
+
+      <label for="password">Password (min 10 chars)</label>
+      <input id="password" name="password" type="password" required autocomplete="new-password" minlength="10" />
+
+      <button type="submit">Create account</button>
+      <p id="msg" class="muted" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <script>
+    const f = document.getElementById("f");
+    const msg = document.getElementById("msg");
+
+    f.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "Creating account…";
+
+      const formData = new FormData(f);
+      const payload = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+      };
+
+      const res = await fetch("/api/register.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        msg.textContent = "Account created ✅ Redirecting to login…";
+        setTimeout(() => (window.location.href = "/login.html"), 800);
+      } else {
+        msg.textContent = data.error || "Registration failed";
+      }
+    });
+  </script>
+</body>
+</html>

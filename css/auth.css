@@ -1,0 +1,99 @@
+/* Auth pages (login/register) */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  padding: 30px;
+  background: #0b1220;
+  color: #e5e7eb;
+  line-height: 1.6;
+}
+
+.card {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #a6b0c3;
+}
+
+.back-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  color: #c9d2e3;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(2,6,23,0.50);
+  color: #e5e7eb;
+  outline: none;
+}
+
+input:focus {
+  border-color: rgba(56,189,248,0.55);
+}
+
+button {
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 0;
+  background: #38bdf8;
+  color: #07101d;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+.muted {
+  color: #a6b0c3;
+}
+
+a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#msg {
+  margin-top: 10px;
+  min-height: 1.2em;
+}
